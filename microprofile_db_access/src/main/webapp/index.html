@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Kneipenbewertung</title>
+<link rel="stylesheet" href="css/grading.css">
+<link rel="stylesheet" href="css/site.css">
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css"
+     integrity="sha256-kLaT2GOSpHechhsozzB+flnD+zUyjE2LlfWPgU04xyI="
+     crossorigin=""/>
+<!-- Make sure you put this AFTER Leaflet's CSS -->
+ <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"
+     integrity="sha256-WBkoXOwTeyKclOHuWtc+i2uENFpDZ9YPdf5Hf+D7ewM="
+     crossorigin=""></script>
+
+<script src="js/map.js"></script>
+<script src="js/access.js"></script>
+
+</head>
+<body>
+	<div class="mainContainer">
+		<header>
+		    <div id="logoutInfo" style="display: none">
+					Herzlich Willkommen <span id="welcome"></span>
+					<button id="logout" type="button" style="width: 100px;" onclick="logout();">Abmelden</button>
+			</div>
+			<div id="loginInfo">
+				<span style="white-space: nowrap"> Benutzer: <input
+					id="userNameLogin" type="text" name="userName" required />
+				</span> <span style="white-space: nowrap"> Password: <input
+					id="passwordLogin" type="password" name="password" required />
+				</span>
+				<button id="login" type="button" style="width: 100px;" onclick="login();">Anmelden</button>
+				<span style="float: right; white-space: nowrap"> <a href="#" id="registrationLink"  > Als neuer Benutzer registrieren  </a></span>
+				<div id="accessError" style="color: red;"></div>
+			</div>
+		</header>
+		<article>
+			<div id="mapid" style="height: 100%;"></div>
+			<div class="form-container" id="registration" style="display: none; background: #F4E2AA;" >
+				<h2 align="center">Registrierung</h2>
+				 <form id="registrationForm">
+						 <table align="center">
+							 <tr>
+							   <td ><label for="vorname" >Vorname :</label></td>
+							   <td align="left"  ><input type="text" id="vorname" name="vorname"  oninput="capitalizeFirstLetter(this)" required></td>
+							 </tr>
+							 <tr>
+							   <td  ><label for="nachname">Nachname :</label></td>
+							   <td align="left" ><input type="text" id="nachname" name="nachname"  oninput="capitalizeFirstLetter(this)" required></td>
+							 </tr>
+						   <tr>
+							   <td  colspan="2">
+								   <span style="display: flex;">
+									   <label for="strasse" style="display: inline; margin-right: 55px;margin-top: 5px;" >Straße :</label>
+									   <input style="display: inline; width: 285px;margin-left: 30px;" type="text" id="strasse" name="strasse" oninput="capitalizeFirstLetter(this)" required>
+									   <label  style="display: inline;margin-top: 5px; margin-left: 14px;margin-right: 5px;" for="nr" >Nr :</label>
+									   <input style=" width: 100px;" type="number" id="nr" name="nr"  min="01"  required>
+								   </span>
+							   </td>
+							   
+							 </tr>
+						   <tr>
+							   <td  colspan="2">
+								   <span style="display: flex;">
+									   <label for="plz" style="display: inline; margin-right: 67px; margin-top: 5px;" >PLZ :</label>
+									   <input style="display: inline; width: 120px; margin-left: 30px;"  type="number" id="plz" name="plz"  size="5" onfocusout="validatePlzInput()" min="01067" max="99998" pattern="[0-9]{6}" placeholder="PLZ must be 5 numeric digits (e.g., 12345)" title="PLZ must be 5 numeric digits (e.g., 12345)" required>
+									   <label for="ort" style="display: inline;margin-top: 5px; margin-left: 14px;margin-right: 5px;" >Ort :</label>
+									   <input style="display: inline; width: 262px;" type="text" id="ort" name="ort" oninput="capitalizeFirstLetter(this)" required>
+								   </span>
+								   <div id="plzError" style="color: red;"></div>
+							   </td>
+							 </tr>
+							 <tr>
+							   <td  width="24%"><label for="email">E-Mail :</label></td>
+							   <td align="left" ><input type="email" id="email" name="email"  placeholder="@stud.hs-kl.de  Or  @stud.fs-kl.de"    required></td>
+							 </tr>
+						   <tr>
+							   <td ><label for="IDbenutzer">Benutzer-ID:</label></td>
+							   <td align="left" ><input type="text" id="IDbenutzer" name="IDbenutzer" oninput="capitalizeFirstLetter(this)"  required></td>
+							 </tr>
+							 <tr>
+							   <td  ><label for="pwd">Passwort :</label></td>
+							   <td align="left" ><input type="password" id="pwd" name="pwd" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{12,}" onkeyup="pwdcheck(); pwdcheck_();"  required></td>
+							 </tr>
+							 <tr>
+							   <td  ><label for="confirmPassword">Passwortsicherheit :</label></td>
+								 
+							   <td align="left" >
+								   <canvas id="pwdCanvas" width="255" height="20" style="border : 1px solid #d3d3d3;" > </canvas>
+								   <!--input type="password" id="confirmPassword" name="confirmPassword"  required--></td>
+							 </tr>
+							 <tr>
+							   <td colspan="2" align="center" >
+								 <input type="submit" value="Registrieren" onClick="addUser();">
+							   </td>  
+							 </tr>
+							 <tr>
+							   <td colspan="2" align="center">
+								 <button type="button" id="cancelButton" onclick="RefrechFormolar()">Abbrechen</button>
+							   </td>
+							 </tr>
+					   </table>
+					   <div id="passwordmessage"  class="passwordmessage" style="color: green;display: block;" ></div>
+				 </form>
+				 
+				</div>
+				
+		</article>
+		<aside style="overflow: auto;">
+			<!-- Infos -->
+			<div style="margin-left: 15px;">
+				<table>
+					<tr>
+						<td>
+							<h3 id="infoo">Kein Ort ausgewählt</h3></td>
+						<td>
+							<button id="inf_bt" onclick="showinfo()">Infos</button>
+						</td>
+					</tr>
+				</table>
+			</div>
+			
+			
+        <!-- Bewertung -->
+        <div id="note" style="padding: 15px; ">
+            <h3>Bewertung abgeben:</h3>
+            <div id="bewertungsDiv">
+                <table>
+                    <tr>
+                        <td>Bewertung:
+                        <td>
+                            <fieldset class="rating" id="ratingFieldset">
+								<input type="radio" id="star5" name="rating" value="5" /><label for="star5" title="Rocks!">5 stars</label>
+								<input type="radio" id="star4" name="rating" value="4" /><label for="star4" title="Pretty good">4 stars</label>
+								<input type="radio" id="star3" name="rating" value="3" /><label for="star3" title="Meh">3 stars</label>
+								<input type="radio" id="star2" name="rating" value="2" /><label for="star2" title="Kinda bad">2 stars</label>
+								<input type="radio" id="star1" name="rating" value="1" /><label for="star1" title="Sucks big time">1 star</label>
+							</fieldset>
+                        </td>
+                    </tr>
+                </table>
+
+                Kommentar:
+                <textarea id="ratingText" name="ratingTxt" style="width: 280px;"> </textarea>
+                <p>
+                Bild hochladen: <br/> <input id="file" type="file" name="file"/>
+				</p>
+                <div id="fehler" style="color: red;"></div>
+                <button type="button" id="commentButton">Absenden</button>
+            </div>
+            
+        </div>
+		</aside>
+		<footer>
+			<table >
+				<tr>
+					<td><h3>Meine Bewertungen: </h3></td>
+				</tr>
+		
+			</table>	
+		</footer>
+	</div>
+	<script>
+        var registrationLink = document.getElementById('registrationLink');
+        var registrationFormContainer = document.getElementById('registration');
+
+        registrationLink.addEventListener('click', function (event) {
+            event.preventDefault(); // Verhindert das Navigieren zu einer anderen Seite
+
+            registrationFormContainer.style.display = 'block';
+        });
+
+        
+			document.getElementById('cancelButton').addEventListener('click', function() {
+            document.getElementById('registrationForm').reset();
+			registrationFormContainer.style.display = 'none';
+            });
+
+
+			
+    </script> 
+	<script>
+		 
+				
+				
+	</script>
+</body>
+
+</html>
