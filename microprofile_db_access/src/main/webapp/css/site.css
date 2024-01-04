@@ -5,7 +5,7 @@ footer { display: none; }
 .mainContainer { 
   height:100vh; 
   display: grid; 
-  grid-template-rows: auto auto auto; 
+ /* grid-template-rows: auto auto auto; */
   grid-template-columns: 100%; 
   grid-template-areas:  
     "login" 
@@ -19,7 +19,7 @@ footer { display: none; }
   .mainContainer { 
     grid-template-rows: 50px 650px auto;
     /*grid-template-columns: 80% 20%; */
-    grid-template-columns: auto minmax(350px, 400px);
+    /*grid-template-columns: auto minmax(350px, 400px);*/
     grid-template-areas:  
       "login      login" 
       "map        rating" 
@@ -78,7 +78,7 @@ footer {
 
 
 #registration {
-	position: absolute;
+	position: relative;
     top: 20px;
     left: 20px;
     width: auto;

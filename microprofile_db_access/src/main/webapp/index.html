@@ -15,11 +15,56 @@
 
 <script src="js/map.js"></script>
 <script src="js/access.js"></script>
+	<style>
+        .sidenav {
+            height: 100%;
+            width: 0;
+            position: fixed;
+            z-index: 1;
+            top: 0;
+            right: 0;
+            background-color: #ffe6b3;
+            overflow-x: hidden;
+            transition: 0.5s;
+            padding-top: 60px;
+			
+        }
 
+            .sidenav a {
+                padding: 8px 8px 8px 32px;
+                text-decoration: none;
+                font-size: 25px;
+                color: #818181;
+                display: block;
+                transition: 0.3s;
+            }
+
+                .sidenav a:hover {
+                    color: #f1f1f1;
+                }
+
+            .sidenav .closebtn {
+                position: absolute;
+                top: 0;
+                right: 25px;
+                font-size: 36px;
+                margin-left: 50px;
+            }
+
+        @media screen and (max-height: 450px) {
+            .sidenav {
+                padding-top: 15px;
+            }
+
+                .sidenav a {
+                    font-size: 18px;
+                }
+        }
+	</style>
 </head>
 <body>
 	<div class="mainContainer">
-		<header>
+		<header id="headid">
 		    <div id="logoutInfo" style="display: none">
 					Herzlich Willkommen <span id="welcome"></span>
 					<button id="logout" type="button" style="width: 100px;" onclick="logout();">Abmelden</button>
@@ -30,13 +75,13 @@
 				</span> <span style="white-space: nowrap"> Password: <input
 					id="passwordLogin" type="password" name="password" required />
 				</span>
-				<button id="login" type="button" style="width: 100px;" onclick="login();">Anmelden</button>
+				<button id="login" type="button" style="width: 100px;" onclick="openNav();">Anmelden</button>
 				<span style="float: right; white-space: nowrap"> <a href="#" id="registrationLink"  > Als neuer Benutzer registrieren  </a></span>
 				<div id="accessError" style="color: red;"></div>
 			</div>
 		</header>
-		<article>
-			<div id="mapid" style="height: 100%;"></div>
+		<article id="art">
+			<div id="mapid" style="height: 837px; width: 100%; "></div>
 			<div class="form-container" id="registration" style="display: none; background: #F4E2AA;" >
 				<h2 align="center">Registrierung</h2>
 				 <form id="registrationForm">
@@ -107,61 +152,77 @@
 				</div>
 				
 		</article>
-		<aside style="overflow: auto;">
+		<div id="mySidenav" class="sidenav">
 			<!-- Infos -->
 			<div style="margin-left: 15px;">
 				<table>
 					<tr>
 						<td>
-							<h3 id="infoo">Kein Ort ausgewählt</h3></td>
+							<h3 id="infoo">Kein Ort ausgewählt</h3>
+							<a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+						</td>
 						<td>
 							<button id="inf_bt" onclick="showinfo()">Infos</button>
 						</td>
 					</tr>
 				</table>
 			</div>
-			
-			
-        <!-- Bewertung -->
-        <div id="note" style="padding: 15px; ">
-            <h3>Bewertung abgeben:</h3>
-            <div id="bewertungsDiv">
-                <table>
-                    <tr>
-                        <td>Bewertung:
-                        <td>
-                            <fieldset class="rating" id="ratingFieldset">
-								<input type="radio" id="star5" name="rating" value="5" /><label for="star5" title="Rocks!">5 stars</label>
-								<input type="radio" id="star4" name="rating" value="4" /><label for="star4" title="Pretty good">4 stars</label>
-								<input type="radio" id="star3" name="rating" value="3" /><label for="star3" title="Meh">3 stars</label>
-								<input type="radio" id="star2" name="rating" value="2" /><label for="star2" title="Kinda bad">2 stars</label>
-								<input type="radio" id="star1" name="rating" value="1" /><label for="star1" title="Sucks big time">1 star</label>
-							</fieldset>
-                        </td>
-                    </tr>
-                </table>
 
-                Kommentar:
-                <textarea id="ratingText" name="ratingTxt" style="width: 280px;"> </textarea>
-                <p>
-                Bild hochladen: <br/> <input id="file" type="file" name="file"/>
-				</p>
-                <div id="fehler" style="color: red;"></div>
-                <button type="button" id="commentButton">Absenden</button>
-            </div>
-            
-        </div>
-		</aside>
-		<footer>
-			<table >
-				<tr>
-					<td><h3>Meine Bewertungen: </h3></td>
-				</tr>
-		
-			</table>	
-		</footer>
-	</div>
+
+			<!-- Bewertung -->
+			<div id="note" style="padding: 15px; ">
+				<h3>Bewertung abgeben:</h3>
+				<div id="bewertungsDiv">
+					<table>
+						<tr>
+							<td>Bewertung:
+							<td>
+								<fieldset class="rating" id="ratingFieldset">
+									<input type="radio" id="star5" name="rating" value="5" /><label for="star5" title="Rocks!">5 stars</label>
+									<input type="radio" id="star4" name="rating" value="4" /><label for="star4" title="Pretty good">4 stars</label>
+									<input type="radio" id="star3" name="rating" value="3" /><label for="star3" title="Meh">3 stars</label>
+									<input type="radio" id="star2" name="rating" value="2" /><label for="star2" title="Kinda bad">2 stars</label>
+									<input type="radio" id="star1" name="rating" value="1" /><label for="star1" title="Sucks big time">1 star</label>
+								</fieldset>
+							</td>
+						</tr>
+					</table>
+
+					Kommentar:
+					<textarea id="ratingText" name="ratingTxt" style="width: 280px;"> </textarea>
+					<p>
+						Bild hochladen: <br /> <input id="file" type="file" name="file" />
+					</p>
+					<div id="fehler" style="color: red;"></div>
+					<button type="button" id="commentButton">Absenden</button>
+				</div>
+
+			</div>
+			<div id="foot">
+				<table>
+					<tr>
+						<td><h3>Meine Bewertungen: </h3></td>
+					</tr>
+
+				</table>
+			</div>
+		</div>
+			
+		</div>
 	<script>
+        function openNav() {
+			document.getElementById("mySidenav").style.width = "25%";
+            //document.getElementById("foot").style.marginRight = "25%";
+            document.getElementById("art").style.marginRight = "25%";
+            document.getElementById("headid").style.marginRight = "25%";
+        }
+
+        function closeNav() {
+			document.getElementById("mySidenav").style.width = "0";
+           // document.getElementById("foot").style.marginRight = "0";
+            document.getElementById("art").style.marginRight = "0";
+            document.getElementById("headid").style.marginRight = "0";
+        }
         var registrationLink = document.getElementById('registrationLink');
         var registrationFormContainer = document.getElementById('registration');
 
