@@ -2,7 +2,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Kneipenbewertung</title>
+<title>Carpooling</title>
 <link rel="stylesheet" href="css/grading.css">
 <link rel="stylesheet" href="css/site.css">
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css"
@@ -64,25 +64,36 @@
 </head>
 <body>
 	<div class="mainContainer">
-		<header id="headid">
-		    <div id="logoutInfo" style="display: none">
-					Herzlich Willkommen <span id="welcome"></span>
-					<button id="logout" type="button" style="width: 100px;" onclick="logout();">Abmelden</button>
-			</div>
-			<div id="loginInfo">
-				<span style="white-space: nowrap"> Benutzer: <input
-					id="userNameLogin" type="text" name="userName" required />
-				</span> <span style="white-space: nowrap"> Password: <input
-					id="passwordLogin" type="password" name="password" required />
+		<header id="headid" >
+			<!--div id="logoutInfo" style="display: none">
+			Herzlich Willkommen <span id="welcome"></span>
+			<button id="logout" type="button" style="width: 100px;" onclick="logout();">Abmelden</button>
+	</!--div-->
+			<div id="logoutInfo" style="display: none;">
+		<span  style="white-space: nowrap" ><a style="font-size: 20px; font-family: Arial, Helvetica, sans-serif; margin-right: 250px;"  > Carpooling </a></span>
+		 <span id="option1" style="white-space: nowrap; margin-right: 5%; font-size: 20px;" onclick="openNav();">Mitfahrgelegenheiten </span>
+		 <span id="option2" style="white-space: nowrap; font-size: 20px;" onclick="openNav();">Mein Stundenplan </span>
+		 <span style="float: right;">
+			 Willkommen   <a id="benutzername" style="margin-right: 5px; font-size: 20px; font-family: Arial, Helvetica, sans-serif; color: brown;"> </a>
+			 <button id="logout" type="button" style="float: right; white-space: nowrap; margin-left: 5px;" onclick="lougout_();">Abmelden</button>
+		 </span>
+			
+	</div>
+			<div id="loginInfo" style="display:block;">
+				<span style="white-space: nowrap"><a style="font-size: 20px; font-family: Arial, Helvetica, sans-serif; margin-right: 400px;"> Carpooling </a></span>
+				<span style="white-space: nowrap; ">
+					Benutzer: <input id="userNameLogin" type="text" name="userName" required />
+				</span> <span style="white-space: nowrap">
+					Password: <input id="passwordLogin" type="password" name="password" required />
 				</span>
-				<button id="login" type="button" style="width: 100px;" onclick="openNav();">Anmelden</button>
-				<span style="float: right; white-space: nowrap"> <a href="#" id="registrationLink"  > Als neuer Benutzer registrieren  </a></span>
+				<button id="login" type="button" style="width: 100px;" onclick="login_();">Anmelden</button>
+				<span style="float: right; white-space: nowrap"> <a href="#" id="registrationLink"> Als neuer Benutzer registrieren  </a></span>
 				<div id="accessError" style="color: red;"></div>
 			</div>
 		</header>
-		<article id="art">
+		<article id="art" style="margin-top: 10px;">
 			<div id="mapid" style="height: 837px; width: 100%; "></div>
-			<div class="form-container" id="registration" style="display: none; background: #F4E2AA;" >
+			<div class="form-container" id="registration" style="display: none; background:white;" >
 				<h2 align="center">Registrierung</h2>
 				 <form id="registrationForm">
 						 <table align="center">

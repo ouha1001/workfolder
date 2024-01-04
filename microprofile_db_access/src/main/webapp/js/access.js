@@ -137,6 +137,33 @@ function emailcheck(){
 				.catch(error => console.error('Error:', error));
 		}
 
+
+		function lougout_() {
+			document.getElementById("logoutInfo").style.display = "none";
+			document.getElementById("loginInfo").style.display = "block";
+			closeNav();
+			document.getElementById("userNameLogin").value = "";
+			document.getElementById("passwordLogin").value = "";
+
+	
+		}
+
+		function login_() {
+			username = document.getElementById("userNameLogin").value;
+			password = document.getElementById("passwordLogin").value;
+			
+			
+			if (username === "admin" && password === "admin") {
+				document.getElementById("logoutInfo").style.display = "block";
+				document.getElementById("loginInfo").style.display = "none";
+
+				document.querySelector("#benutzername").innerHTML = "Oussama Hamioui";
+			} else {
+				alert("Login failed !!");
+			}
+	
+
+		}
 		function addUser() {
 			emailcheck();
 			// Get the registration data from the form fields
