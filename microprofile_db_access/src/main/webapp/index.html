@@ -1,23 +1,42 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-<title>Carpooling</title>
-<link rel="stylesheet" href="css/grading.css">
-<link rel="stylesheet" href="css/site.css">
-<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css"
-     integrity="sha256-kLaT2GOSpHechhsozzB+flnD+zUyjE2LlfWPgU04xyI="
-     crossorigin=""/>
-<!-- Make sure you put this AFTER Leaflet's CSS -->
- <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"
-     integrity="sha256-WBkoXOwTeyKclOHuWtc+i2uENFpDZ9YPdf5Hf+D7ewM="
-     crossorigin=""></script>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Carpooling</title>
+	<link rel="stylesheet" href="css/grading.css">
+	<link rel="stylesheet" href="css/site.css">
+	<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css"
+		  integrity="sha256-kLaT2GOSpHechhsozzB+flnD+zUyjE2LlfWPgU04xyI="
+		  crossorigin="" />
+	<!-- Make sure you put this AFTER Leaflet's CSS -->
+	<script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"
+			integrity="sha256-WBkoXOwTeyKclOHuWtc+i2uENFpDZ9YPdf5Hf+D7ewM="
+			crossorigin=""></script>
 
-<script src="js/map.js"></script>
-<script src="js/access.js"></script>
-	
+	<script src="js/map.js"></script>
+	<script src="js/access.js"></script>
+	<style>
+        #benutzername, .avatar, #logout {
+            display: inline-block;
+            vertical-align: central; /* Align elements vertically in the middle */
+            margin-right: 10px; /* Adjust the margin as needed */
+        }
+        .avatar {
+           
+			
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+        }
+        #logout {
+            border-radius: 50%;
+			
+			background-color : red;
+        }
+	</style>
 </head>
-<body>
+<body style="margin: 0px;">
 	<div class="mainContainer">
 		<header id="headid" >
 			<!--div id="logoutInfo" style="display: none">
@@ -28,9 +47,13 @@
 		<span  style="white-space: nowrap" ><a style="font-size: 20px; font-family: Arial, Helvetica, sans-serif; margin-right: 250px;"  > Carpooling </a></span>
 		 <span id="option1" style="white-space: nowrap; margin-right: 5%; font-size: 20px;" onclick="openNav();">Mitfahrgelegenheiten </span>
 		 <span id="option2" style="white-space: nowrap; font-size: 20px;" onclick="openNav();">Mein Stundenplan </span>
-		 <span style="float: right;">
+		 <span style="float: right; margin-right: 5px;  ">
 			 Willkommen   <a id="benutzername" style="margin-right: 5px; font-size: 20px; font-family: Arial, Helvetica, sans-serif; color: brown;"> </a>
 			 <button id="logout" type="button" style="float: right; white-space: nowrap; margin-left: 5px;" onclick="lougout_();">Abmelden</button>
+		 </span>
+				<span style="float: right;  ">
+			 <img src="pexels.png"  class="avatar" >
+			
 		 </span>
 			
 	</div>

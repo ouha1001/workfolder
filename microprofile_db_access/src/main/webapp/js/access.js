@@ -202,6 +202,36 @@ function emailcheck(){
 				if (response.ok) {
 					// Registration successful, proceed with login
 					login(); // Call the login function with the registered username and password
+					let data = {
+						username: document.querySelector("#IDbenutzer").value,
+						password: document.querySelector("#pwd").value
+					};
+
+					fetch('demo/access', {
+						method: 'post',
+						headers: {
+							'Content-type': 'application/json'
+						},
+						body: JSON.stringify(data)
+					})
+						.then(response => response.json())
+						.then(data => {
+							console.log("Login Token " + data);
+							sessionStorage.setItem('loginToken', data.token);
+							token = data.token;
+							document.getElementById("logoutInfo").style.display = "block";
+							document.getElementById("loginInfo").style.display = "none";
+
+							document.querySelector("#benutzername").innerHTML = username;
+							//showNotesView();
+							//setUserLabel();
+							//getNotes();
+						})
+						.catch((error) => {
+							console.error('Error:', error);
+							sessionStorage.removeItem('loginToken');
+							document.querySelector("#loginError").innerHTML = "Es ist ein Fehler aufgetreten!";
+						});
 				} else {
 					// Handle registration error here (if needed)
 					console.error('Registration failed');
