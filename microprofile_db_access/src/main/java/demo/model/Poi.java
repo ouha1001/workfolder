@@ -12,7 +12,7 @@ import demo.model.converter.PositionConverter;
  * 
  */
 @Entity
-@Table(name = "rateme_poi")
+@Table(name = "user")
 @NamedQuery(name = "Poi.findAll", query = "SELECT r FROM Poi r")
 public class Poi implements Serializable {
 	private static final long serialVersionUID = 1L;

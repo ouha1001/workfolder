@@ -77,3 +77,5 @@ public class PositionConverter implements AttributeConverter<Position, byte[]> {
         return new Position(lon, lat);
     }
 }
+
+

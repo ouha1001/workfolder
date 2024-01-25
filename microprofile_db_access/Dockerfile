@@ -4,4 +4,4 @@ ENV MYSQL_DATABASE=rateme_swtp
 ENV MYSQL_ALLOW_EMPTY_PASSWORD=true
 
 COPY ./db/conf/* /etc/mysql/conf.d
-COPY ./db/entrypoint/* /docker-entrypoint-initdb.d/   
+COPY ./db/initdb/* /docker-entrypoint-initdb.d/   

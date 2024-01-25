@@ -10,7 +10,7 @@ import javax.persistence.*;
  * 
  */
 @Entity
-@Table(name = "rateme_user")
+@Table(name = "user")
 @NamedQueries({
 	@NamedQuery(name = "User.findAll", query = "SELECT r FROM User r"),
 	@NamedQuery(name = "User.findByUserName", query = "SELECT r FROM User r WHERE r.userName = :userName")
@@ -26,7 +26,7 @@ public class User implements Serializable {
 	@Column(name = "username", length = 20, nullable = false, unique = true)
 	private String userName;
 
-	@Column(name = "E_Mail", length = 50, nullable = false)
+	@Column(name = "eMail", length = 50, nullable = false)
 	private String email;
 
 	@Column(name = "firstname", length = 20, nullable = false)
